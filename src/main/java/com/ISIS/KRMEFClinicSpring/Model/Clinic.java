@@ -20,6 +20,7 @@ public class Clinic {
     private List<Family> families;
     private List<History> histories;
     private List<Medicine> medicines;
+    private List<Inventory> inventories;
     private List<Observation> observations;
     private List<Pathology> pathologies;
     private List<Patient> patients;
@@ -126,6 +127,14 @@ public class Clinic {
 
     public void setMedicines(List<Medicine> medicines) {
         this.medicines = medicines;
+    }
+
+    public List<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(List<Inventory> inventories) {
+        this.inventories = inventories;
     }
 
     public List<Observation> getObservations() {

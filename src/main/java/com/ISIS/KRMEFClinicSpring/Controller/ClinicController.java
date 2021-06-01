@@ -37,6 +37,8 @@ public class ClinicController {
     @Autowired
     MedicineService medicineService;
     @Autowired
+    InventoryService inventoryService;
+    @Autowired
     ObservationService observationService;
     @Autowired
     PathologyService pathologyService;
@@ -68,6 +70,7 @@ public class ClinicController {
         clinic.setFamilies(familyService.listAllFamily());
         clinic.setHistories(historyService.listAllHistory());
         clinic.setMedicines(medicineService.listAllMedicine());
+        clinic.setInventories(inventoryService.listAllInventory());
         clinic.setObservations(observationService.listAllObservation());
         clinic.setPathologies(pathologyService.listAllPathology());
         clinic.setPatients(patientService.listAllPatient());

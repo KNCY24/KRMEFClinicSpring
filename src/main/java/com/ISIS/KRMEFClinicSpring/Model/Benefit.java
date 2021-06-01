@@ -17,11 +17,12 @@ public class Benefit {
 
     private int idpatient;
     private int idmedicine;
+    private int iddetailstock;
 
     public Benefit() {
     }
 
-    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, int idmedicine) {
+    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, int idmedicine, int iddetailstock) {
         this.idbenefit = idbenefit;
         this.date = date;
         this.packaging = packaging;
@@ -30,6 +31,7 @@ public class Benefit {
         this.due = due;
         this.idpatient = idpatient;
         this.idmedicine = idmedicine;
+        this.iddetailstock = iddetailstock;
     }
 
     @Id
@@ -96,5 +98,13 @@ public class Benefit {
 
     public void setIdmedicine(int idmedicine) {
         this.idmedicine = idmedicine;
+    }
+
+    public int getIddetailstock() {
+        return iddetailstock;
+    }
+
+    public void setIddetailstock(int iddetailstock) {
+        this.iddetailstock = iddetailstock;
     }
 }

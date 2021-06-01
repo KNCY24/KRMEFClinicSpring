@@ -14,19 +14,21 @@ public class Medicine {
     private int quantity;
     private Date expiration;
     private double retailprice;
+    private String source;
 
     private int iddetailstock;
 
     public Medicine() {
     }
 
-    public Medicine(int idmedicine, String name, String packaging, int quantity, Date expiration, double retailprice, int iddetailstock) {
+    public Medicine(int idmedicine, String name, String packaging, int quantity, Date expiration, double retailprice, String source, int iddetailstock) {
         this.idmedicine = idmedicine;
         this.name = name;
         this.packaging = packaging;
         this.quantity = quantity;
         this.expiration = expiration;
         this.retailprice = retailprice;
+        this.source = source;
         this.iddetailstock = iddetailstock;
     }
 
@@ -78,6 +80,14 @@ public class Medicine {
 
     public void setRetailprice(double retailprice) {
         this.retailprice = retailprice;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public int getIddetailstock() {

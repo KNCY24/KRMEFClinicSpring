@@ -11,14 +11,14 @@ public class Charge {
     private String name;
     private double amount;
     private String duration;
-    private String frequency;
+    private int frequency;
 
     private int idpatient;
 
     public Charge() {
     }
 
-    public Charge(int idcharge, String name, double amount, String duration, String frequency, int idpatient) {
+    public Charge(int idcharge, String name, double amount, String duration, int frequency, int idpatient) {
         this.idcharge = idcharge;
         this.name = name;
         this.amount = amount;
@@ -62,11 +62,11 @@ public class Charge {
         this.duration = duration;
     }
 
-    public String getFrequency() {
+    public int getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(String frequency) {
+    public void setFrequency(int frequency) {
         this.frequency = frequency;
     }
 

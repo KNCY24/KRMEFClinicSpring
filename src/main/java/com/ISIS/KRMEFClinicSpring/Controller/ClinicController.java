@@ -1,8 +1,10 @@
 package com.ISIS.KRMEFClinicSpring.Controller;
 
-import com.ISIS.KRMEFClinicSpring.Model.Clinic;
+import com.ISIS.KRMEFClinicSpring.Model.*;
 import com.ISIS.KRMEFClinicSpring.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -82,4 +84,52 @@ public class ClinicController {
         return clinic;
     }
 
+    @PutMapping("/addPatient")
+    public Clinic update(@RequestBody Clinic clinic) {
+        situationService.saveSituation(clinic.getSituations().get(0));
+        int idsituation=0;
+        int idpatient=0;
+        for(Situation situation: situationService.listAllSituation()){
+            if(situation == clinic.getSituations().get(0)){
+                idsituation = situation.getIdsituation();
+                Patient newpatient = clinic.getPatients().get(0);
+                newpatient.setIdsituation(idsituation);
+                patientService.savePatient(newpatient);
+                for(Patient patient : patientService.listAllPatient()){
+                    if(patient==newpatient){
+                        idpatient = patient.getIdpatient();
+                        for(Family family : clinic.getFamilies()){
+                            family.setIdpatient(idpatient);
+                            familyService.saveFamily(family);
+                        }
+                        for(Dependant dependant : clinic.getDependants()){
+                            dependant.setIdpatient(idpatient);
+                            dependantService.saveDependant(dependant);
+                        }
+                        for(Pathology pathology : clinic.getPathologies()){
+                            pathology.setIdpatient(idpatient);
+                            pathologyService.savePathology(pathology);
+                        }
+                        if(clinic.getAllergies().size()>0){
+                            allergyService.saveAllergy(clinic.getAllergies().get(0));
+                        }
+                        for(History history: clinic.getHistories()){
+                            history.setIdpatient(idpatient);
+                            historyService.saveHistory(history);
+                        }
+                        for(Charge charge : clinic.getCharges()){
+                            charge.setIdpatient(idpatient);
+                            chargeService.saveCharge(charge);
+                        }
+                        for(Resource resource : clinic.getResources()){
+                            resource.setIdpatient(idpatient);
+                            resourceService.saveResource(resource);
+                        }
+                    }
+                }
+            }
+        }
+
+        return getClinic();
+    }
 }

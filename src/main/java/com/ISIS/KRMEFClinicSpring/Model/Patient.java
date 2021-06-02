@@ -12,6 +12,7 @@ public class Patient {
     private String name;
     private String sexe;
     private Date date;
+    private String birthlocation;
     private String phone;
     private String address;
     private double weight;
@@ -26,11 +27,12 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(int idpatient, String name, String sexe, Date date, String phone, String address, double weight, double height, String occupation, String category, String remarks, int iduser, int idsituation) {
+    public Patient(int idpatient, String name, String sexe, Date date, String birthlocation, String phone, String address, double weight, double height, String occupation, String category, String remarks, int iduser, int idsituation) {
         this.idpatient = idpatient;
         this.name = name;
         this.sexe = sexe;
         this.date = date;
+        this.birthlocation = birthlocation;
         this.phone = phone;
         this.address = address;
         this.weight = weight;
@@ -74,6 +76,14 @@ public class Patient {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getBirthlocation() {
+        return birthlocation;
+    }
+
+    public void setBirthlocation(String birthlocation) {
+        this.birthlocation = birthlocation;
     }
 
     public String getPhone() {

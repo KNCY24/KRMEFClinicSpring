@@ -9,25 +9,21 @@ import javax.persistence.Id;
 public class Family {
     private int idfamily;
     private String relationship;
-    private String sexe;
     private int age;
     private String occupation;
     private String remarks;
 
-    private int idsituation;
     private int idpatient;
 
     public Family() {
     }
 
-    public Family(int idfamily, String relationship, String sexe, int age, String occupation, String remarks, int idsituation, int idpatient) {
+    public Family(int idfamily, String relationship, int age, String occupation, String remarks, int idpatient) {
         this.idfamily = idfamily;
         this.relationship = relationship;
-        this.sexe = sexe;
         this.age = age;
         this.occupation = occupation;
         this.remarks = remarks;
-        this.idsituation = idsituation;
         this.idpatient = idpatient;
     }
 
@@ -47,14 +43,6 @@ public class Family {
 
     public void setRelationship(String relationship) {
         this.relationship = relationship;
-    }
-
-    public String getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
     }
 
     public int getAge() {
@@ -79,14 +67,6 @@ public class Family {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public int getIdsituation() {
-        return idsituation;
-    }
-
-    public void setIdsituation(int idsituation) {
-        this.idsituation = idsituation;
     }
 
     public int getIdpatient() {

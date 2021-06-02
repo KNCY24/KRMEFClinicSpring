@@ -14,20 +14,18 @@ public class Dependant {
     private String occupation;
     private String remarks;
 
-    private int idsituation;
     private int idpatient;
 
     public Dependant() {
     }
 
-    public Dependant(int iddependant, String relationship, String sexe, int age, String occupation, String remarks, int idsituation, int idpatient) {
+    public Dependant(int iddependant, String relationship, String sexe, int age, String occupation, String remarks, int idpatient) {
         this.iddependant = iddependant;
         this.relationship = relationship;
         this.sexe = sexe;
         this.age = age;
         this.occupation = occupation;
         this.remarks = remarks;
-        this.idsituation = idsituation;
         this.idpatient = idpatient;
     }
 
@@ -79,14 +77,6 @@ public class Dependant {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public int getIdsituation() {
-        return idsituation;
-    }
-
-    public void setIdsituation(int idsituation) {
-        this.idsituation = idsituation;
     }
 
     public int getIdpatient() {

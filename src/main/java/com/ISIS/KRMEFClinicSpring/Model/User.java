@@ -5,6 +5,8 @@ import java.util.Date;
 
 @Entity(name = "User")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int iduser;
     private String name;
     private String role;
@@ -26,8 +28,6 @@ public class User {
         this.password = password;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIduser() {
         return iduser;
     }

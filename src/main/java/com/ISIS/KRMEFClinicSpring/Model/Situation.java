@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 @Entity(name = "Situation")
 public class Situation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idsituation;
     private String typesituation;
     private String occupation;
@@ -22,8 +24,6 @@ public class Situation {
         this.remarks = remarks;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdsituation() {
         return idsituation;
     }

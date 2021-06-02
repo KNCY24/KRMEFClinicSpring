@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 @Entity(name = "Detailstock")
 public class DetailStock {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int iddetailstock;
     private String packaging;
     private int quantity;
@@ -22,8 +24,6 @@ public class DetailStock {
         this.remarks = remarks;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIddetailstock() {
         return iddetailstock;
     }

@@ -7,28 +7,26 @@ import javax.persistence.Id;
 
 @Entity(name = "Resource")
 public class Resource {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idresource;
     private String source;
     private double amount;
     private String duration;
     private int frequency;
 
-    private int idpatient;
 
     public Resource() {
     }
 
-    public Resource(int idresource, String source, double amount, String duration, int frequency, int idpatient) {
+    public Resource(int idresource, String source, double amount, String duration, int frequency) {
         this.idresource = idresource;
         this.source = source;
         this.amount = amount;
         this.duration = duration;
         this.frequency = frequency;
-        this.idpatient = idpatient;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdresource() {
         return idresource;
     }
@@ -69,11 +67,4 @@ public class Resource {
         this.frequency = frequency;
     }
 
-    public int getIdpatient() {
-        return idpatient;
-    }
-
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
-    }
 }

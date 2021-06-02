@@ -7,26 +7,23 @@ import javax.persistence.Id;
 
 @Entity(name = "Prescription")
 public class Prescription {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idprescription;
     private String typeprescription;
     private String details;
     private String remarks;
 
-    private int idconsultation;
-
     public Prescription() {
     }
 
-    public Prescription(int idprescription, String typeprescription, String details, String remarks, int idconsultation) {
+    public Prescription(int idprescription, String typeprescription, String details, String remarks) {
         this.idprescription = idprescription;
         this.typeprescription = typeprescription;
         this.details = details;
         this.remarks = remarks;
-        this.idconsultation = idconsultation;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdprescription() {
         return idprescription;
     }
@@ -59,11 +56,4 @@ public class Prescription {
         this.remarks = remarks;
     }
 
-    public int getIdconsultation() {
-        return idconsultation;
-    }
-
-    public void setIdconsultation(int idconsultation) {
-        this.idconsultation = idconsultation;
-    }
 }

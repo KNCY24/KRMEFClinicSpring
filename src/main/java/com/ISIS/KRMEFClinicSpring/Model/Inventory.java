@@ -8,6 +8,8 @@ import java.util.Date;
 
 @Entity(name = "Inventory")
 public class Inventory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idinventory;
     private String name;
     private String source;
@@ -21,8 +23,6 @@ public class Inventory {
         this.source = source;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdinventory() {
         return idinventory;
     }

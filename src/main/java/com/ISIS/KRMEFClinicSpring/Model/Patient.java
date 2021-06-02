@@ -1,13 +1,14 @@
 package com.ISIS.KRMEFClinicSpring.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity(name = "Patient")
 public class Patient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpatient;
     private String name;
     private String sexe;
@@ -21,13 +22,35 @@ public class Patient {
     private String category;
     private String remarks;
 
+    @OneToOne(targetEntity = Allergy.class,cascade = CascadeType.ALL)
+    private Allergy allergy;
+    @OneToMany
+    private Collection<Charge> charges;
+    @OneToMany
+    private Collection<Consultation> consultations;
+    @OneToMany
+    private Collection<Dependant> dependants;
+    @OneToMany
+    private Collection<Family> families;
+    @OneToMany
+    private Collection<History> histories;
+    @OneToMany
+    private Collection<Pathology> pathologies;
+    @OneToMany
+    private Collection<Resource> resources;
+    @OneToOne(targetEntity = Situation.class,cascade = CascadeType.ALL)
+    private Situation situation;
+    @OneToMany
+    private Collection<Emergency> emergencies;
+    @OneToMany
+    private Collection<Treatment> treatments;
+
     private int iduser;
-    private int idsituation;
 
     public Patient() {
     }
 
-    public Patient(int idpatient, String name, String sexe, Date date, String birthlocation, String phone, String address, double weight, double height, String occupation, String category, String remarks, int iduser, int idsituation) {
+    public Patient(int idpatient, String name, String sexe, Date date, String birthlocation, String phone, String address, double weight, double height, String occupation, String category, String remarks, Allergy allergy, Collection<Charge> charges, Collection<Consultation> consultations, Collection<Dependant> dependants, Collection<Family> families, Collection<History> histories, Collection<Pathology> pathologies, Collection<Resource> resources, Situation situation, Collection<Emergency> emergencies, Collection<Treatment> treatments, int iduser) {
         this.idpatient = idpatient;
         this.name = name;
         this.sexe = sexe;
@@ -40,12 +63,20 @@ public class Patient {
         this.occupation = occupation;
         this.category = category;
         this.remarks = remarks;
+        this.allergy = allergy;
+        this.charges = charges;
+        this.consultations = consultations;
+        this.dependants = dependants;
+        this.families = families;
+        this.histories = histories;
+        this.pathologies = pathologies;
+        this.resources = resources;
+        this.situation = situation;
+        this.emergencies = emergencies;
+        this.treatments = treatments;
         this.iduser = iduser;
-        this.idsituation = idsituation;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdpatient() {
         return idpatient;
     }
@@ -150,11 +181,91 @@ public class Patient {
         this.iduser = iduser;
     }
 
-    public int getIdsituation() {
-        return idsituation;
+    public Allergy getAllergy() {
+        return allergy;
     }
 
-    public void setIdsituation(int idsituation) {
-        this.idsituation = idsituation;
+    public void setAllergy(Allergy allergy) {
+        this.allergy = allergy;
+    }
+
+    public Collection<Charge> getCharges() {
+        return charges;
+    }
+
+    public void setCharges(Collection<Charge> charges) {
+        this.charges = charges;
+    }
+
+    public Collection<Consultation> getConsultations() {
+        return consultations;
+    }
+
+    public void setConsultations(Collection<Consultation> consultations) {
+        this.consultations = consultations;
+    }
+
+    public Collection<Dependant> getDependants() {
+        return dependants;
+    }
+
+    public void setDependants(Collection<Dependant> dependants) {
+        this.dependants = dependants;
+    }
+
+    public Collection<Family> getFamilies() {
+        return families;
+    }
+
+    public void setFamilies(Collection<Family> families) {
+        this.families = families;
+    }
+
+    public Collection<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(Collection<History> histories) {
+        this.histories = histories;
+    }
+
+    public Collection<Pathology> getPathologies() {
+        return pathologies;
+    }
+
+    public void setPathologies(Collection<Pathology> pathologies) {
+        this.pathologies = pathologies;
+    }
+
+    public Collection<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(Collection<Resource> resources) {
+        this.resources = resources;
+    }
+
+    public Situation getSituation() {
+        return situation;
+    }
+
+    public void setSituation(Situation situation) {
+        this.situation = situation;
+    }
+
+    public Collection<Emergency> getEmergencies() {
+        return emergencies;
+    }
+
+    public void setEmergencies(Collection<Emergency> emergencies) {
+        this.emergencies = emergencies;
+    }
+
+    public Collection<Treatment> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(Collection<Treatment> treatments) {
+        this.treatments = treatments;
     }
 }

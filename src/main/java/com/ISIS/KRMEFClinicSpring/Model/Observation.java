@@ -7,26 +7,24 @@ import javax.persistence.Id;
 
 @Entity(name = "Observation")
 public class Observation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idobservation;
     private String name;
     private String details;
     private String remarks;
 
-    private int idconsultation;
 
     public Observation() {
     }
 
-    public Observation(int idobservation, String name, String details, String remarks, int idconsultation) {
+    public Observation(int idobservation, String name, String details, String remarks) {
         this.idobservation = idobservation;
         this.name = name;
         this.details = details;
         this.remarks = remarks;
-        this.idconsultation = idconsultation;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdobservation() {
         return idobservation;
     }
@@ -59,11 +57,4 @@ public class Observation {
         this.remarks = remarks;
     }
 
-    public int getIdconsultation() {
-        return idconsultation;
-    }
-
-    public void setIdconsultation(int idconsultation) {
-        this.idconsultation = idconsultation;
-    }
 }

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 @Entity(name = "Dependant")
 public class Dependant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int iddependant;
     private String relationship;
     private String sexe;
@@ -14,23 +16,19 @@ public class Dependant {
     private String occupation;
     private String remarks;
 
-    private int idpatient;
 
     public Dependant() {
     }
 
-    public Dependant(int iddependant, String relationship, String sexe, int age, String occupation, String remarks, int idpatient) {
+    public Dependant(int iddependant, String relationship, String sexe, int age, String occupation, String remarks) {
         this.iddependant = iddependant;
         this.relationship = relationship;
         this.sexe = sexe;
         this.age = age;
         this.occupation = occupation;
         this.remarks = remarks;
-        this.idpatient = idpatient;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIddependant() {
         return iddependant;
     }
@@ -79,11 +77,4 @@ public class Dependant {
         this.remarks = remarks;
     }
 
-    public int getIdpatient() {
-        return idpatient;
-    }
-
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
-    }
 }

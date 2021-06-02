@@ -1,35 +1,42 @@
 package com.ISIS.KRMEFClinicSpring.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity(name = "Consultation")
 public class Consultation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idconsultation;
     private String issue;
     private Date date;
     private String remarks;
 
     private int iduser;
-    private int idpatient;
+
+    @OneToMany
+    private Collection<Diagnosis> diagnoses;
+    @OneToMany
+    private Collection<Observation> observations;
+    @OneToMany
+    private Collection<Prescription> prescriptions;
 
     public Consultation() {
     }
 
-    public Consultation(int idconsultation, String issue, Date date, String remarks, int iduser, int idpatient) {
+    public Consultation(int idconsultation, String issue, Date date, String remarks, int iduser, Collection<Diagnosis> diagnoses, Collection<Observation> observations, Collection<Prescription> prescriptions) {
         this.idconsultation = idconsultation;
         this.issue = issue;
         this.date = date;
         this.remarks = remarks;
         this.iduser = iduser;
-        this.idpatient = idpatient;
+        this.diagnoses = diagnoses;
+        this.observations = observations;
+        this.prescriptions = prescriptions;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdconsultation() {
         return idconsultation;
     }
@@ -70,11 +77,27 @@ public class Consultation {
         this.iduser = iduser;
     }
 
-    public int getIdpatient() {
-        return idpatient;
+    public Collection<Diagnosis> getDiagnoses() {
+        return diagnoses;
     }
 
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
+    public void setDiagnoses(Collection<Diagnosis> diagnoses) {
+        this.diagnoses = diagnoses;
+    }
+
+    public Collection<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(Collection<Observation> observations) {
+        this.observations = observations;
+    }
+
+    public Collection<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(Collection<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
     }
 }

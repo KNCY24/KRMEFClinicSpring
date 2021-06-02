@@ -1,28 +1,28 @@
 package com.ISIS.KRMEFClinicSpring.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity(name = "Pathology")
 public class Pathology {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpathology;
     private String name;
 
-    private int idpatient;
+    @OneToMany
+    private Collection<Treatment> treatments;
 
     public Pathology() {
     }
 
-    public Pathology(int idpathology, String name, int idpatient) {
+    public Pathology(int idpathology, String name, Collection<Treatment> treatments) {
         this.idpathology = idpathology;
         this.name = name;
-        this.idpatient = idpatient;
+        this.treatments = treatments;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdpathology() {
         return idpathology;
     }
@@ -39,11 +39,11 @@ public class Pathology {
         this.name = name;
     }
 
-    public int getIdpatient() {
-        return idpatient;
+    public Collection<Treatment> getTreatments() {
+        return treatments;
     }
 
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
+    public void setTreatments(Collection<Treatment> treatments) {
+        this.treatments = treatments;
     }
 }

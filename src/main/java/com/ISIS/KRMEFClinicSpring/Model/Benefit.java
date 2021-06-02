@@ -1,13 +1,12 @@
 package com.ISIS.KRMEFClinicSpring.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "Benefit")
 public class Benefit {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idbenefit;
     private Date date;
     private String packaging;
@@ -17,12 +16,14 @@ public class Benefit {
 
     private int idpatient;
     private int idmedicine;
-    private int iddetailstock;
+
+    @OneToOne(targetEntity = DetailStock.class,cascade = CascadeType.ALL)
+    private DetailStock detailstock;
 
     public Benefit() {
     }
 
-    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, int idmedicine, int iddetailstock) {
+    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, int idmedicine, DetailStock detailstock) {
         this.idbenefit = idbenefit;
         this.date = date;
         this.packaging = packaging;
@@ -31,11 +32,9 @@ public class Benefit {
         this.due = due;
         this.idpatient = idpatient;
         this.idmedicine = idmedicine;
-        this.iddetailstock = iddetailstock;
+        this.detailstock = detailstock;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdbenefit() {
         return idbenefit;
     }
@@ -100,11 +99,11 @@ public class Benefit {
         this.idmedicine = idmedicine;
     }
 
-    public int getIddetailstock() {
-        return iddetailstock;
+    public DetailStock getdetailstock() {
+        return detailstock;
     }
 
-    public void setIddetailstock(int iddetailstock) {
-        this.iddetailstock = iddetailstock;
+    public void setdetailstock(DetailStock detailstock) {
+        this.detailstock = detailstock;
     }
 }

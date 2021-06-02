@@ -7,28 +7,26 @@ import javax.persistence.Id;
 
 @Entity(name = "Family")
 public class Family {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idfamily;
     private String relationship;
     private int age;
     private String occupation;
     private String remarks;
 
-    private int idpatient;
 
     public Family() {
     }
 
-    public Family(int idfamily, String relationship, int age, String occupation, String remarks, int idpatient) {
+    public Family(int idfamily, String relationship, int age, String occupation, String remarks) {
         this.idfamily = idfamily;
         this.relationship = relationship;
         this.age = age;
         this.occupation = occupation;
         this.remarks = remarks;
-        this.idpatient = idpatient;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdfamily() {
         return idfamily;
     }
@@ -69,11 +67,4 @@ public class Family {
         this.remarks = remarks;
     }
 
-    public int getIdpatient() {
-        return idpatient;
-    }
-
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
-    }
 }

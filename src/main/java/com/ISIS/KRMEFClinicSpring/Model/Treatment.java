@@ -8,6 +8,8 @@ import java.util.Date;
 
 @Entity(name = "Treatment")
 public class Treatment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idtreatment;
     private String name;
     private Date start;
@@ -17,12 +19,11 @@ public class Treatment {
     private String quantity;
     private String remarks;
 
-    private int idpathology;
 
     public Treatment() {
     }
 
-    public Treatment(int idtreatment, String name, Date start, Date deadline, String duration, int frequency, String quantity, String remarks, int idpathology) {
+    public Treatment(int idtreatment, String name, Date start, Date deadline, String duration, int frequency, String quantity, String remarks) {
         this.idtreatment = idtreatment;
         this.name = name;
         this.start = start;
@@ -31,11 +32,8 @@ public class Treatment {
         this.frequency = frequency;
         this.quantity = quantity;
         this.remarks = remarks;
-        this.idpathology = idpathology;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdtreatment() {
         return idtreatment;
     }
@@ -100,11 +98,4 @@ public class Treatment {
         this.remarks = remarks;
     }
 
-    public int getIdpathology() {
-        return idpathology;
-    }
-
-    public void setIdpathology(int idpathology) {
-        this.idpathology = idpathology;
-    }
 }

@@ -7,22 +7,21 @@ import javax.persistence.Id;
 
 @Entity(name = "Allergy")
 public class Allergy {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idallergy;
     private String name;
 
-    private int idpatient;
 
     public Allergy() {
     }
 
-    public Allergy(int idallergy, String name, int idpatient) {
+    public Allergy(int idallergy, String name) {
         this.idallergy = idallergy;
         this.name = name;
-        this.idpatient = idpatient;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getIdallergy() {
         return idallergy;
     }
@@ -39,11 +38,5 @@ public class Allergy {
         this.name = name;
     }
 
-    public int getIdpatient() {
-        return idpatient;
-    }
 
-    public void setIdpatient(int idpatient) {
-        this.idpatient = idpatient;
-    }
 }

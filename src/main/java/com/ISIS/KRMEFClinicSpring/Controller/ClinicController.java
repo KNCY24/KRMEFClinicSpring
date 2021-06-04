@@ -46,6 +46,29 @@ public class ClinicController {
         return getClinic();
     }
 
+    @PutMapping("/addUser")
+    public Clinic addUser(@RequestBody User user) {
+        userService.saveUser(user);
+        return getClinic();
+    }
+
+    @PutMapping("/deleteUser")
+    public Clinic deleteUser(@RequestBody int iduser) {
+        userService.deleteUser(iduser);
+        return getClinic();
+    }
+
+    @PutMapping("/updateUser")
+    public Clinic updateUser(@RequestBody User newuser) {
+        for(User user : userService.listAllUser()){
+            if(user.getIduser()==newuser.getIduser()){
+                user=newuser;
+            }
+        }
+        return getClinic();
+    }
+
+
     @PutMapping("/sellMedicine")
     public Clinic sellMedicine(@RequestBody Medicine newmedicine) {
         for(Medicine medicine:medicineService.listAllMedicine()){

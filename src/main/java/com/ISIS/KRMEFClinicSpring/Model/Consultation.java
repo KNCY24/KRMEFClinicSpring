@@ -14,7 +14,7 @@ public class Consultation {
     private Date date;
     private String remarks;
 
-    private int iduser;
+    private String user;
 
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Diagnosis> diagnoses;
@@ -26,12 +26,12 @@ public class Consultation {
     public Consultation() {
     }
 
-    public Consultation(int idconsultation, String issue, Date date, String remarks, int iduser, Collection<Diagnosis> diagnoses, Collection<Observation> observations, Collection<Prescription> prescriptions) {
+    public Consultation(int idconsultation, String issue, Date date, String remarks, String user, Collection<Diagnosis> diagnoses, Collection<Observation> observations, Collection<Prescription> prescriptions) {
         this.idconsultation = idconsultation;
         this.issue = issue;
         this.date = date;
         this.remarks = remarks;
-        this.iduser = iduser;
+        this.user = user;
         this.diagnoses = diagnoses;
         this.observations = observations;
         this.prescriptions = prescriptions;
@@ -69,12 +69,12 @@ public class Consultation {
         this.remarks = remarks;
     }
 
-    public int getIduser() {
-        return iduser;
+    public String getUser() {
+        return user;
     }
 
-    public void setIduser(int iduser) {
-        this.iduser = iduser;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Collection<Diagnosis> getDiagnoses() {

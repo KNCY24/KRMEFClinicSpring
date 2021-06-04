@@ -62,7 +62,11 @@ public class ClinicController {
     public Clinic updateUser(@RequestBody User newuser) {
         for(User user : userService.listAllUser()){
             if(user.getIduser()==newuser.getIduser()){
-                user=newuser;
+                user.setDate(newuser.getDate());
+                user.setName(newuser.getName());
+                user.setRole(newuser.getRole());
+                user.setSexe(newuser.getSexe());
+                user.setUsername(newuser.getUsername());
             }
         }
         return getClinic();

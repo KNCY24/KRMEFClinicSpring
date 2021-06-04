@@ -12,16 +12,16 @@ public class DetailStock {
     private int iddetailstock;
     private String packaging;
     private int quantity;
-    private String remarks;
+    private double more;
 
     public DetailStock() {
     }
 
-    public DetailStock(int iddetailstock, String packaging, int quantity, String remarks) {
+    public DetailStock(int iddetailstock, String packaging, int quantity, double more) {
         this.iddetailstock = iddetailstock;
         this.packaging = packaging;
         this.quantity = quantity;
-        this.remarks = remarks;
+        this.more = more;
     }
 
     public int getIddetailstock() {
@@ -48,11 +48,11 @@ public class DetailStock {
         this.quantity = quantity;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public double getMore() {
+        return more;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setMore(double more) {
+        this.more = more;
     }
 }

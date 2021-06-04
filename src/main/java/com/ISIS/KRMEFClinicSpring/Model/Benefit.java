@@ -1,6 +1,7 @@
 package com.ISIS.KRMEFClinicSpring.Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity(name = "Benefit")
@@ -15,7 +16,6 @@ public class Benefit {
     private double due;
 
     private int idpatient;
-    private int idmedicine;
 
     @OneToOne(targetEntity = DetailStock.class,cascade = CascadeType.ALL)
     private DetailStock detailstock;
@@ -23,7 +23,7 @@ public class Benefit {
     public Benefit() {
     }
 
-    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, int idmedicine, DetailStock detailstock) {
+    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, DetailStock detailstock) {
         this.idbenefit = idbenefit;
         this.date = date;
         this.packaging = packaging;
@@ -31,7 +31,6 @@ public class Benefit {
         this.price = price;
         this.due = due;
         this.idpatient = idpatient;
-        this.idmedicine = idmedicine;
         this.detailstock = detailstock;
     }
 
@@ -91,13 +90,6 @@ public class Benefit {
         this.idpatient = idpatient;
     }
 
-    public int getIdmedicine() {
-        return idmedicine;
-    }
-
-    public void setIdmedicine(int idmedicine) {
-        this.idmedicine = idmedicine;
-    }
 
     public DetailStock getdetailstock() {
         return detailstock;

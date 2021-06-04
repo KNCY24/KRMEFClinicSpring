@@ -11,7 +11,7 @@ public class Pathology {
     private int idpathology;
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Treatment> treatments;
 
     public Pathology() {

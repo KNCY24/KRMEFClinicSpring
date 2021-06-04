@@ -24,25 +24,25 @@ public class Patient {
 
     @OneToOne(targetEntity = Allergy.class,cascade = CascadeType.ALL)
     private Allergy allergy;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Charge> charges;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Consultation> consultations;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Dependant> dependants;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Family> families;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<History> histories;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Pathology> pathologies;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Resource> resources;
     @OneToOne(targetEntity = Situation.class,cascade = CascadeType.ALL)
     private Situation situation;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Emergency> emergencies;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Treatment> treatments;
 
     private int iduser;

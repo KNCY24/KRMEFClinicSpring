@@ -6,17 +6,17 @@ import java.util.Collection;
 import java.util.List;
 
 public class Clinic {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Benefit> benefits;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Expense> expenses;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Medicine> medicines;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Inventory> inventories;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Patient> patients;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<User> users;
 
     public Clinic() {

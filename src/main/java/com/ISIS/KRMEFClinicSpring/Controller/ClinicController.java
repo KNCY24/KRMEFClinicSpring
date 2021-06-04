@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -45,14 +46,60 @@ public class ClinicController {
         return getClinic();
     }
 
+    @PutMapping("/sellMedicine")
+    public Clinic sellMedicine(@RequestBody Medicine newmedicine) {
+        for(Medicine medicine:medicineService.listAllMedicine()){
+            if(medicine.getIdmedicine()==newmedicine.getIdmedicine()){
+                medicine.setQuantity(newmedicine.getQuantity());
+                medicine.getVentes().addAll(newmedicine.getVentes());
+                medicine.getDetailstock().setQuantity(newmedicine.getDetailstock().getQuantity());
+                medicine.getDetailstock().setMore(newmedicine.getDetailstock().getMore());
+            }
+        }
+        return getClinic();
+    }
+
+
+    @PutMapping("/addMedicine")
+    public Clinic addMedicine(@RequestBody Medicine newmedicine) {
+        boolean medicineExist = false;
+        boolean inventoryExist = false;
+        Medicine med = new Medicine();
+        if(medicineService.listAllMedicine().size()>0){
+            for(Medicine medicine : medicineService.listAllMedicine()) {
+                if (medicine.getName().equals(newmedicine.getName()) && medicine.getPackaging().equals(newmedicine.getPackaging()) && medicine.getDetailstock().getPackaging().equals(newmedicine.getDetailstock().getPackaging()) && medicine.getDetailstock().getQuantity() == newmedicine.getDetailstock().getQuantity() && medicine.getSource().equals(newmedicine.getSource()) && medicine.getRetailprice() == newmedicine.getRetailprice() && medicine.getExpiration().getYear() == newmedicine.getExpiration().getYear() && medicine.getExpiration().getMonth() == newmedicine.getExpiration().getMonth() && medicine.getExpiration().getDate() == newmedicine.getExpiration().getDate()) {
+                    medicineExist = true;
+                    med = medicine;
+                }else if(medicine.getName().equals(newmedicine.getName()) && medicine.getSource().equals(newmedicine.getSource())){
+                    inventoryExist=true;
+                }
+            }
+        }
+        if(medicineExist == true){
+            med.setQuantity(med.getQuantity()+ newmedicine.getQuantity());
+            for(Expense expense : newmedicine.getAchats()){
+                med.getAchats().add(expense);
+            }
+        }else{
+            medicineService.saveMedicine(newmedicine);
+            if(inventoryExist==false) {
+                Inventory inventory = new Inventory();
+                inventory.setName(newmedicine.getName());
+                inventory.setSource(newmedicine.getSource());
+                inventoryService.saveInventory(inventory);
+            }
+        }
+        return getClinic();
+    }
+
     @PutMapping("/deleteDrug")
     public Clinic deleteDrug(@RequestBody int id){
         Medicine medicine = medicineService.getMedicine(id);
         medicine.setQuantity(0);
         medicine.setRetailprice(0);
         medicine.setSource("");
-        medicine.getdetailstock().setQuantity(0);
-        medicine.getdetailstock().setRemarks("");
+        medicine.getDetailstock().setQuantity(0);
+        medicine.getDetailstock().setMore(0);
         return getClinic();
     }
 }

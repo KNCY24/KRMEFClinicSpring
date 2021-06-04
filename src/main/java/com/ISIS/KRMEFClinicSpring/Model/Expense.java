@@ -13,7 +13,6 @@ public class Expense {
     private int quantity;
     private double amount;
 
-    private int idmedicine;
 
     @OneToOne(targetEntity = DetailStock.class,cascade = CascadeType.ALL)
     private DetailStock detailstock;
@@ -21,13 +20,12 @@ public class Expense {
     public Expense() {
     }
 
-    public Expense(int idexpense, Date date, String packaging, int quantity, double amount, int idmedicine, DetailStock detailstock) {
+    public Expense(int idexpense, Date date, String packaging, int quantity, double amount, DetailStock detailstock) {
         this.idexpense = idexpense;
         this.date = date;
         this.packaging = packaging;
         this.quantity = quantity;
         this.amount = amount;
-        this.idmedicine = idmedicine;
         this.detailstock = detailstock;
     }
 
@@ -69,14 +67,6 @@ public class Expense {
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public int getIdmedicine() {
-        return idmedicine;
-    }
-
-    public void setIdmedicine(int idmedicine) {
-        this.idmedicine = idmedicine;
     }
 
     public DetailStock getdetailstock() {

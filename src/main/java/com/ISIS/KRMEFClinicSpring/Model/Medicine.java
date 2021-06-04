@@ -1,6 +1,7 @@
 package com.ISIS.KRMEFClinicSpring.Model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity(name = "Medicine")
@@ -17,11 +18,15 @@ public class Medicine {
 
     @OneToOne(targetEntity = DetailStock.class,cascade = CascadeType.ALL)
     private DetailStock detailstock;
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
+    private Collection<Expense> achats;
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
+    private Collection<Benefit> ventes;
 
     public Medicine() {
     }
 
-    public Medicine(int idmedicine, String name, String packaging, int quantity, Date expiration, double retailprice, String source, DetailStock detailstock) {
+    public Medicine(int idmedicine, String name, String packaging, int quantity, Date expiration, double retailprice, String source, DetailStock detailstock, Collection<Expense> achats, Collection<Benefit> ventes) {
         this.idmedicine = idmedicine;
         this.name = name;
         this.packaging = packaging;
@@ -30,6 +35,8 @@ public class Medicine {
         this.retailprice = retailprice;
         this.source = source;
         this.detailstock = detailstock;
+        this.achats = achats;
+        this.ventes = ventes;
     }
 
     public int getIdmedicine() {
@@ -88,11 +95,27 @@ public class Medicine {
         this.source = source;
     }
 
-    public DetailStock getdetailstock() {
+    public DetailStock getDetailstock() {
         return detailstock;
     }
 
-    public void setdetailstock(DetailStock detailstock) {
+    public void setDetailstock(DetailStock detailstock) {
         this.detailstock = detailstock;
+    }
+
+    public Collection<Expense> getAchats() {
+        return achats;
+    }
+
+    public void setAchats(Collection<Expense> achats) {
+        this.achats = achats;
+    }
+
+    public Collection<Benefit> getVentes() {
+        return ventes;
+    }
+
+    public void setVentes(Collection<Benefit> ventes) {
+        this.ventes = ventes;
     }
 }

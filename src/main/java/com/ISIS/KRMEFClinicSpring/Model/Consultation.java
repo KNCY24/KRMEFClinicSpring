@@ -16,11 +16,11 @@ public class Consultation {
 
     private int iduser;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Diagnosis> diagnoses;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Observation> observations;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Prescription> prescriptions;
 
     public Consultation() {

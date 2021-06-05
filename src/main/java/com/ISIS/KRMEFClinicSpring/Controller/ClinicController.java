@@ -150,4 +150,14 @@ public class ClinicController {
         return getClinic();
     }
 
+    @PutMapping("/payDebt")
+    public Clinic payDebt(@RequestBody Benefit updateBenefit) {
+        for(Benefit benefit :benefitService.listAllBenefit()){
+            if(benefit.getIdbenefit()==updateBenefit.getIdbenefit()){
+                benefit.setDue(updateBenefit.getDue());
+            }
+        }
+        return getClinic();
+    }
+
 }

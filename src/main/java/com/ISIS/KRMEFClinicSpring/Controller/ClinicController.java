@@ -3,14 +3,7 @@ package com.ISIS.KRMEFClinicSpring.Controller;
 import com.ISIS.KRMEFClinicSpring.Model.*;
 import com.ISIS.KRMEFClinicSpring.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
-import java.util.Collection;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")
@@ -148,6 +141,12 @@ public class ClinicController {
     @PutMapping("/deleteConsultation")
     public Clinic deleteConsultation(@RequestBody int idconsultation) {
         consultationService.deleteConsultation(idconsultation);
+        return getClinic();
+    }
+
+    @PutMapping("/deletePayment")
+    public Clinic deletePayment(@RequestBody int idpayment) {
+        benefitService.deleteBenefit(idpayment);
         return getClinic();
     }
 

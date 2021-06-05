@@ -10,6 +10,7 @@ public class Benefit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idbenefit;
     private Date date;
+    private Date dateCreation;
     private String packaging;
     private int quantity;
     private double price;
@@ -23,9 +24,10 @@ public class Benefit {
     public Benefit() {
     }
 
-    public Benefit(int idbenefit, Date date, String packaging, int quantity, double price, double due, int idpatient, DetailStock detailstock) {
+    public Benefit(int idbenefit, Date date, Date dateCreation, String packaging, int quantity, double price, double due, int idpatient, DetailStock detailstock) {
         this.idbenefit = idbenefit;
         this.date = date;
+        this.dateCreation = dateCreation;
         this.packaging = packaging;
         this.quantity = quantity;
         this.price = price;
@@ -90,6 +92,13 @@ public class Benefit {
         this.idpatient = idpatient;
     }
 
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
 
     public DetailStock getdetailstock() {
         return detailstock;

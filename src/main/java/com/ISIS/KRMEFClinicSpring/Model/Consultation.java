@@ -12,6 +12,7 @@ public class Consultation {
     private int idconsultation;
     private String issue;
     private Date date;
+    private Date dateCreation;
     private String remarks;
 
     private String user;
@@ -26,10 +27,11 @@ public class Consultation {
     public Consultation() {
     }
 
-    public Consultation(int idconsultation, String issue, Date date, String remarks, String user, Collection<Diagnosis> diagnoses, Collection<Observation> observations, Collection<Prescription> prescriptions) {
+    public Consultation(int idconsultation, String issue, Date date, Date dateCreation, String remarks, String user, Collection<Diagnosis> diagnoses, Collection<Observation> observations, Collection<Prescription> prescriptions) {
         this.idconsultation = idconsultation;
         this.issue = issue;
         this.date = date;
+        this.dateCreation = dateCreation;
         this.remarks = remarks;
         this.user = user;
         this.diagnoses = diagnoses;
@@ -99,5 +101,13 @@ public class Consultation {
 
     public void setPrescriptions(Collection<Prescription> prescriptions) {
         this.prescriptions = prescriptions;
+    }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
 }

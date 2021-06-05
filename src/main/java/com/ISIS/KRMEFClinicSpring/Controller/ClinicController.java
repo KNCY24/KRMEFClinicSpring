@@ -160,4 +160,16 @@ public class ClinicController {
         return getClinic();
     }
 
+
+    @PutMapping("/addTreatment")
+    public Clinic addTreatment(@RequestBody Patient newpatient) {
+        for(Patient patient : patientService.listAllPatient()){
+            if(newpatient.getIdpatient()==patient.getIdpatient()){
+                for(Treatment treatment: newpatient.getTreatments()){
+                    patient.getTreatments().add(treatment);
+                }
+            }
+        }
+        return getClinic();
+    }
 }

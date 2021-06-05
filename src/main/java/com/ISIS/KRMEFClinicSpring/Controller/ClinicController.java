@@ -145,4 +145,10 @@ public class ClinicController {
         return getClinic();
     }
 
+    @PutMapping("/deleteConsultation")
+    public Clinic deleteConsultation(@RequestBody int idconsultation) {
+        consultationService.deleteConsultation(idconsultation);
+        return getClinic();
+    }
+
 }

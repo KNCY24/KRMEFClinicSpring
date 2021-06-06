@@ -23,6 +23,8 @@ public class ClinicController {
     UserService userService;
     @Autowired
     ConsultationService consultationService;
+    @Autowired
+    TreatmentService treatmentService;
 
     @GetMapping("/clinic")
     public Clinic getClinic() {
@@ -168,6 +170,23 @@ public class ClinicController {
                 for(Treatment treatment: newpatient.getTreatments()){
                     patient.getTreatments().add(treatment);
                 }
+            }
+        }
+        return getClinic();
+    }
+
+    @PutMapping("/deleteTreatment")
+    public Clinic deleteTreatment(@RequestBody int idtreatment) {
+        treatmentService.deleteTreatment(idtreatment);
+        return getClinic();
+    }
+
+    @PutMapping("/updateTreatment")
+    public Clinic updateTreatment(@RequestBody Treatment newtreatment) {
+        for(Treatment treatment : treatmentService.listAllTreatment()){
+            if(treatment.getIdtreatment()==newtreatment.getIdtreatment()){
+                treatment.setDeadline(newtreatment.getDeadline());
+                treatment.setRemarks(newtreatment.getRemarks());
             }
         }
         return getClinic();

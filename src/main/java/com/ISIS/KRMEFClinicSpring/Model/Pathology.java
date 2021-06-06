@@ -9,18 +9,16 @@ public class Pathology {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idpathology;
+    private String type;
     private String name;
-
-    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
-    private Collection<Treatment> treatments;
 
     public Pathology() {
     }
 
-    public Pathology(int idpathology, String name, Collection<Treatment> treatments) {
+    public Pathology(int idpathology, String type, String name) {
         this.idpathology = idpathology;
+        this.type = type;
         this.name = name;
-        this.treatments = treatments;
     }
 
     public int getIdpathology() {
@@ -39,11 +37,11 @@ public class Pathology {
         this.name = name;
     }
 
-    public Collection<Treatment> getTreatments() {
-        return treatments;
+    public String getType() {
+        return type;
     }
 
-    public void setTreatments(Collection<Treatment> treatments) {
-        this.treatments = treatments;
+    public void setType(String type) {
+        this.type = type;
     }
 }

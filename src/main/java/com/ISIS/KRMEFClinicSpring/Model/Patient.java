@@ -50,7 +50,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(int idpatient, String name, String sexe, Date date, String birthlocation, String phone, String address, double weight, double height, String occupation, String category, String remarks, Allergy allergy, Collection<Charge> charges, Collection<Consultation> consultations, Collection<Dependant> dependants, Collection<Family> families, Collection<History> histories, Collection<Pathology> pathologies, Collection<Resource> resources, Situation situation, Collection<Emergency> emergencies, Collection<Treatment> treatments, int iduser) {
+    public Patient(int idpatient, String name, String sexe, Date date, String birthlocation, String phone, String address, String occupation, String category, String remarks, Allergy allergy, Collection<Charge> charges, Collection<Consultation> consultations, Collection<Dependant> dependants, Collection<Family> families, Collection<History> histories, Collection<Pathology> pathologies, Collection<Resource> resources, Situation situation, Collection<Emergency> emergencies, Collection<Treatment> treatments, int iduser) {
         this.idpatient = idpatient;
         this.name = name;
         this.sexe = sexe;
@@ -58,8 +58,6 @@ public class Patient {
         this.birthlocation = birthlocation;
         this.phone = phone;
         this.address = address;
-        this.weight = weight;
-        this.height = height;
         this.occupation = occupation;
         this.category = category;
         this.remarks = remarks;

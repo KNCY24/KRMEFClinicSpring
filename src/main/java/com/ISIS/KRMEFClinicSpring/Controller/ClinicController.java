@@ -25,6 +25,21 @@ public class ClinicController {
     ConsultationService consultationService;
     @Autowired
     TreatmentService treatmentService;
+    @Autowired
+    ChargeService chargeService;
+    @Autowired
+    EmergencyService emergencyService;
+    @Autowired
+    DependantService dependantService;
+    @Autowired
+    FamilyService familyService;
+    @Autowired
+    ResourceService resourceService;
+    @Autowired
+    PathologyService pathologyService;
+    @Autowired
+    HistoryService historyService;
+
 
     @GetMapping("/clinic")
     public Clinic getClinic() {
@@ -41,6 +56,68 @@ public class ClinicController {
     @PutMapping("/addPatient")
     public Clinic addPatient(@RequestBody Patient patient) {
         patientService.savePatient(patient);
+        return getClinic();
+    }
+
+    @PutMapping("/updatePatient")
+    public Clinic updatePatient(@RequestBody Patient newpatient) {
+        for(Patient patient : patientService.listAllPatient()){
+            if(patient.getIdpatient()==newpatient.getIdpatient()){
+                patient.setName(newpatient.getName());
+                patient.setAddress(newpatient.getAddress());
+                patient.setBirthlocation(newpatient.getBirthlocation());
+                patient.setDate(newpatient.getDate());
+                patient.setCategory(newpatient.getCategory());
+                patient.setIduser(newpatient.getIduser());
+                patient.setPhone(newpatient.getPhone());
+                patient.setRemarks(newpatient.getRemarks());
+                patient.setSexe(newpatient.getSexe());
+                patient.setOccupation(newpatient.getOccupation());
+
+
+                patient.getAllergy().setName(newpatient.getAllergy().getName());
+
+                patient.getSituation().setTypesituation(newpatient.getSituation().getTypesituation());
+                patient.getSituation().setOccupation(newpatient.getSituation().getOccupation());
+                patient.getSituation().setRemarks(newpatient.getSituation().getRemarks());
+
+                patient.getCharges().clear();
+                for(Charge charge: newpatient.getCharges()){
+                    patient.getCharges().add(charge);
+                }
+
+                patient.getEmergencies().clear();
+                for(Emergency emergency : newpatient.getEmergencies()){
+                    patient.getEmergencies().add(emergency);
+                }
+
+                patient.getDependants().clear();
+                for(Dependant dependant: newpatient.getDependants()){
+                    patient.getDependants().add(dependant);
+                }
+
+                patient.getFamilies().clear();
+                for(Family family: newpatient.getFamilies()){
+                    patient.getFamilies().add(family);
+                }
+
+                patient.getHistories().clear();
+                for(History history: newpatient.getHistories()){
+                    patient.getHistories().add(history);
+                }
+
+                patient.getPathologies().clear();
+                for(Pathology pathology: newpatient.getPathologies()){
+                    patient.getPathologies().add(pathology);
+                }
+
+                patient.getResources().clear();
+                for(Resource resource: newpatient.getResources()){
+                    patient.getResources().add(resource);
+                }
+
+            }
+        }
         return getClinic();
     }
 

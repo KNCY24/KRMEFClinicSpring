@@ -16,8 +16,6 @@ public class Patient {
     private String birthlocation;
     private String phone;
     private String address;
-    private double weight;
-    private double height;
     private String occupation;
     private String category;
     private String remarks;
@@ -129,22 +127,6 @@ public class Patient {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
     }
 
     public String getOccupation() {

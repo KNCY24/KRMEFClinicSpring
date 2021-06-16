@@ -13,8 +13,6 @@ public class Clinic {
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Medicine> medicines;
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
-    private Collection<Inventory> inventories;
-    @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<Patient> patients;
     @OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
     private Collection<User> users;
@@ -46,15 +44,6 @@ public class Clinic {
     public void setMedicines(Collection<Medicine> medicines) {
         this.medicines = medicines;
     }
-
-    public Collection<Inventory> getInventories() {
-        return inventories;
-    }
-
-    public void setInventories(Collection<Inventory> inventories) {
-        this.inventories = inventories;
-    }
-
 
     public Collection<User> getUsers() {
         return users;

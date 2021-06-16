@@ -16,8 +16,6 @@ public class ClinicController {
     @Autowired
     MedicineService medicineService;
     @Autowired
-    InventoryService inventoryService;
-    @Autowired
     PatientService patientService;
     @Autowired
     UserService userService;
@@ -48,9 +46,19 @@ public class ClinicController {
         clinic.setExpenses(expenseService.listAllExpense());
         clinic.setMedicines(medicineService.listAllMedicine());
         clinic.setPatients(patientService.listAllPatient());
-        clinic.setInventories(inventoryService.listAllInventory());
         clinic.setUsers(userService.listAllUser());
         return clinic;
+    }
+
+    @PutMapping("/updatePw")
+    public Clinic updatePw(@RequestBody User newuser) {
+        for(User user : userService.listAllUser()){
+            if(user.getIduser()== newuser.getIduser()){
+                user.setPassword(newuser.getPassword());
+                user.setFirstpw(false);
+            }
+        }
+        return  getClinic();
     }
 
     @PutMapping("/addPatient")
@@ -179,31 +187,43 @@ public class ClinicController {
         }
         if(medicineExist == true){
             med.setQuantity(med.getQuantity()+ newmedicine.getQuantity());
+            med.getDetailstock().setMore(med.getDetailstock().getMore()+newmedicine.getDetailstock().getMore());
             for(Expense expense : newmedicine.getAchats()){
                 med.getAchats().add(expense);
             }
         }else{
             medicineService.saveMedicine(newmedicine);
-            if(inventoryExist==false) {
-                Inventory inventory = new Inventory();
-                inventory.setName(newmedicine.getName());
-                inventory.setSource(newmedicine.getSource());
-                inventoryService.saveInventory(inventory);
+        }
+        return getClinic();
+    }
+
+    @PutMapping("/emptyMedicine")
+    public Clinic emptyMedicine(@RequestBody int id){
+        Medicine medicine = medicineService.getMedicine(id);
+        medicine.setQuantity(0);
+        medicine.getDetailstock().setQuantity(0);
+        medicine.getDetailstock().setMore(0);
+        return getClinic();
+    }
+
+    @PutMapping("/deleteMedicine")
+    public Clinic deleteMedicine(@RequestBody int id){
+        medicineService.deleteMedicine(id);
+        return getClinic();
+    }
+
+    @PutMapping("/updateMedicine")
+    public Clinic updateMedicine(@RequestBody Medicine newmedicine){
+        for(Medicine medicine : medicineService.listAllMedicine()){
+            if(medicine.getIdmedicine()== newmedicine.getIdmedicine()){
+                medicine.setName(newmedicine.getName());
+                medicine.setSource(newmedicine.getSource());
+                medicine.setExpiration(newmedicine.getExpiration());
             }
         }
         return getClinic();
     }
 
-    @PutMapping("/deleteDrug")
-    public Clinic deleteDrug(@RequestBody int id){
-        Medicine medicine = medicineService.getMedicine(id);
-        medicine.setQuantity(0);
-        medicine.setRetailprice(0);
-        medicine.setSource("");
-        medicine.getDetailstock().setQuantity(0);
-        medicine.getDetailstock().setMore(0);
-        return getClinic();
-    }
 
     @PutMapping("/addConsultation")
     public Clinic addConsultation(@RequestBody Patient newpatient) {
@@ -225,9 +245,49 @@ public class ClinicController {
 
     @PutMapping("/deletePayment")
     public Clinic deletePayment(@RequestBody int idpayment) {
-        benefitService.deleteBenefit(idpayment);
+        Medicine med = new Medicine();
+        Benefit ben= new Benefit();
+        for(Medicine medicine:medicineService.listAllMedicine()){
+            for(Benefit benefit:medicine.getVentes()){
+                if(benefit.getIdbenefit()==idpayment){
+                    med=medicine;
+                    ben=benefit;
+                    if(medicine.getPackaging().equals(benefit.getPackaging())){
+                        System.out.println("1"+benefit.getPackaging());
+                        medicine.setQuantity(medicine.getQuantity()+ benefit.getQuantity());
+                    }else{
+                        if(benefit.getQuantity()< medicine.getDetailstock().getQuantity()){
+                            System.out.println("2");
+                            medicine.getDetailstock().setMore(medicine.getDetailstock().getMore()+benefit.getQuantity());
+                        }else if(benefit.getQuantity()== medicine.getDetailstock().getQuantity()){
+                            System.out.println("3");
+                            medicine.setQuantity(medicine.getQuantity()+1);
+                        }else{
+                            while(benefit.getQuantity()>=medicine.getDetailstock().getQuantity()){
+                                benefit.setQuantity(benefit.getQuantity()-medicine.getDetailstock().getQuantity());
+                                System.out.println("4"+benefit.getQuantity());
+                                System.out.println("5"+medicine.getQuantity());
+                                medicine.setQuantity(medicine.getQuantity()+1);
+                            }
+                            if(benefit.getQuantity()!=0){
+                                System.out.println("6");
+                                medicine.getDetailstock().setMore(benefit.getQuantity());
+                            }
+                        }
+                        while(medicine.getDetailstock().getMore()>= medicine.getDetailstock().getQuantity()){
+                            System.out.println("7");
+                            medicine.getDetailstock().setMore(medicine.getDetailstock().getMore()-medicine.getDetailstock().getQuantity());
+                            medicine.setQuantity(medicine.getQuantity()+1
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        med.getVentes().remove(ben);
         return getClinic();
     }
+
 
     @PutMapping("/payDebt")
     public Clinic payDebt(@RequestBody Benefit updateBenefit) {

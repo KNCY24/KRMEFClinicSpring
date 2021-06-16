@@ -14,11 +14,12 @@ public class User {
     private String sexe;
     private String username;
     private String password;
+    private boolean firstpw;
 
     public User() {
     }
 
-    public User(int iduser, String name, String role,Date date, String sexe, String username, String password) {
+    public User(int iduser, String name, String role, Date date, String sexe, String username, String password, boolean firstpw) {
         this.iduser = iduser;
         this.name = name;
         this.role = role;
@@ -26,6 +27,7 @@ public class User {
         this.sexe = sexe;
         this.username = username;
         this.password = password;
+        this.firstpw = firstpw;
     }
 
     public int getIduser() {
@@ -82,5 +84,13 @@ public class User {
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
+    }
+
+    public boolean isFirstpw() {
+        return firstpw;
+    }
+
+    public void setFirstpw(boolean firstpw) {
+        this.firstpw = firstpw;
     }
 }

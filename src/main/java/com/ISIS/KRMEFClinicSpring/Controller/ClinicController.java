@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/generic")
 public class ClinicController {
     @Autowired
@@ -37,7 +37,6 @@ public class ClinicController {
     PathologyService pathologyService;
     @Autowired
     HistoryService historyService;
-
 
     @GetMapping("/clinic")
     public Clinic getClinic() {
@@ -239,7 +238,18 @@ public class ClinicController {
 
     @PutMapping("/deleteConsultation")
     public Clinic deleteConsultation(@RequestBody int idconsultation) {
-        consultationService.deleteConsultation(idconsultation);
+        Consultation c = new Consultation();
+        Patient p = new Patient();
+        for(Patient patient : patientService.listAllPatient()){
+            for(Consultation consultation : patient.getConsultations()){
+                if(consultation.getIdconsultation()==idconsultation){
+                    c = consultation;
+                    p = patient;
+                }
+            }
+        }
+        p.getConsultations().remove(c);
+        //consultationService.deleteConsultation(idconsultation);
         return getClinic();
     }
 
